@@ -1,6 +1,8 @@
 import Hero from "./components/Hero";
 import Navbar from "./components/Nav";
+import Service from "./components/Service";
 import SubNav from "./components/SubNav";
+import Welcome from "./components/Welcome";
 
 const App = () => {
   return (
@@ -8,7 +10,9 @@ const App = () => {
       <Navbar/>
       <Hero/>
       <SubNav/>
-      <Hero/>
+      <Welcome/>
+       <Service/> 
+      {/* //  </> */}
     </div>
   )
 }
