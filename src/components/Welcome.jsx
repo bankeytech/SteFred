@@ -1,7 +1,4 @@
-import React from 'react'
-import { FiEdit } from "react-icons/fi";
-import Bground from "../assets/images/Welimg.png"
-import "../index.css"
+import Bground from "../assets/images/Welimg.png";
 
 const services = [
   {
@@ -23,40 +20,45 @@ const services = [
 
 const Welcome = () => {
   return (
-    <div className='relative flex items-center justify-center'>
-      <div className='bg-[#FFF4E0] w-full'>
-        <div className='grid lg:grid-cols-2 sm:grid-cols-1 p-8 px-18 gap-10 place-items-center'>
-          <div className='flex flex-col items-start'>
-            <h2 className='font-bold text-[4.5vw] leading-[5vw] pb-3'>
-              Welcome To Stefred Davs Ventures LTD.
-            </h2>
-            <h6 className=''>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-              Iste eaque br hic <br /> delectus, id est molestiae corrupti nostrum 
-              aliquam vel accusantium. <br /> A tenetur inventore culpa ut, 
-              deserunt mollitia molestias corporis quas!
-            </h6> 
-            
-           <div className="flex flex-col gap-4 pt-3 pr-[7.25rem]">
-              {services.map((service, index) => (
-                <div
-                  key={index}
-                  className="bg-[#F4A300]/50 p-4 rounded-2xl text-[#2E2E2E]"
-                >
-                  <h3 className="font-bold text-[1.5vw]">{service.title}</h3>
-                  <h5>{service.description}</h5>
-                </div>
-              ))}
-            </div>
-          </div>
+    <section className="relative flex items-center justify-center bg-[#FFF4E0] w-full py-16 px-6 sm:px-10 lg:px-20">
+      <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+        {/* LEFT TEXT SECTION */}
+        <div className="flex flex-col items-start space-y-6">
+          <h2 className="font-bold text-[#2E2E2E] text-3xl sm:text-4xl lg:text-5xl leading-tight">
+            Welcome To <br className="hidden sm:block" /> Stefred Davs Ventures LTD.
+          </h2>
 
-          <div className='contain'>
-            <img src={Bground} alt="img" />
+          <p className="text-[#444] text-sm sm:text-base lg:text-lg leading-relaxed">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eaque
+            reprehenderit hic delectus, id est molestiae corrupti nostrum aliquam
+            vel accusantium. A tenetur inventore culpa ut, deserunt mollitia
+            molestias corporis quas!
+          </p>
+
+          <div className="flex flex-col gap-4 w-full">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="bg-[#F4A300]/40 hover:bg-[#F4A300]/60 transition p-4 rounded-xl shadow-sm text-[#2E2E2E]"
+              >
+                <h3 className="font-semibold text-lg sm:text-xl mb-1">{service.title}</h3>
+                <p className="text-sm sm:text-base">{service.description}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    </div>
-  )
-}
 
-export default Welcome
+        {/* RIGHT IMAGE SECTION */}
+        <div className="w-full flex justify-center">
+          <img
+            src={Bground}
+            alt="Welcome"
+            className="w-full max-w-md sm:max-w-lg lg:max-w-full rounded-2xl object-contain"
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Welcome;

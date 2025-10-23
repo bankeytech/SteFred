@@ -7,7 +7,7 @@ const Hero = () => {
       <div className='absolute top-[7vw] right-0 px-8 py-6 mx-auto max-w-screen-xl w-full sm:px-6 lg:px-18 '>
        <div className='mt-10'>
         <div className='flex items-center justify-start gap-27'>
-          <h1 className='font-bold text-[5vw]'>Integrated Facility</h1>
+          <h1 className='font-bold text-[5vw]'>Integrated <span className='text-[#7A2E2E]'>Facility</span> </h1>
           <h5 className='font-medium hidden lg:block md:block'> Ensuring Seamless Operations, <br /> Safety, and Efficiency for all your Assets</h5>
         </div>
 
