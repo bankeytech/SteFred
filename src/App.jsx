@@ -1,3 +1,5 @@
+import Choose from "./components/Choose";
+import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Nav";
 import Service from "./components/Service";
@@ -11,7 +13,9 @@ const App = () => {
       <Hero/>
       <SubNav/>
       <Welcome/>
-       <Service/> 
+      <Service/> 
+      <Choose/>
+      <Footer/>
       {/* //  </> */}
     </div>
   )

@@ -48,7 +48,7 @@ const Service = () => {
     <div className='relative flex items-center justify-center'>
       <div className='bg-[#FFF4E0] w-full'>
         <div className='lg:px-20 px-6 mt-20'>
-          <h2 className='font-bold text-3xl'>Services</h2>
+          <h2 className='font-bold text-3xl text-[#7A2E2E]'>Services</h2>
           <h4 className='text-4xl font-semibold pt-5'>Our Valuable Facility Management <br /> Services</h4>
         </div>
         <div className="m-10 lg:px-48 mt-15 hidden md:block lg:block">
