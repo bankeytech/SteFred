@@ -1,12 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/images/Logo1.svg"
 
 const navA =
-  "flex items-center gap-3 text-[#2E2E2E] dark:text-[#2E2E2E] transition hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer text-[1.2vw]";
+  "flex items-center gap-3 text-[#2E2E2E] dark:text-[#2E2E2E] transition duration-200 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer text-[1.2vw]";
 
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+   // Track scroll to control SVG reveal
+    useEffect(() => {
+      const handleScroll = () => {
+        // Choose how far (in pixels) before the SVG is fully shown
+        const revealHeight = 820; // adjust this based on your layout
+        const scrolled = Math.min(window.scrollY / revealHeight, 1);
+        setScrollProgress(scrolled);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+     // helper to blend between two colors (from and to)
+      const blendColor = (from, to, progress) => {
+      const f = parseInt(from.slice(1), 16);
+      const t = parseInt(to.slice(1), 16);
+
+      const rf = (f >> 16) & 0xff,
+        gf = (f >> 8) & 0xff,
+        bf = f & 0xff;
+      const rt = (t >> 16) & 0xff,
+        gt = (t >> 8) & 0xff,
+        bt = t & 0xff;
+
+      const r = Math.round(rf + (rt - rf) * progress);
+      const g = Math.round(gf + (gt - gf) * progress);
+      const b = Math.round(bf + (bt - bf) * progress);
+
+      return `rgb(${r}, ${g}, ${b})`;
+    };
+
+    const dynamicColor = blendColor("#7A2E2E", "#FFF4E0", scrollProgress);
+    const dynamicColor2 = blendColor("#F4A300", "#F4A300", scrollProgress);
+
+      // background fade (white with variable transparency)
+    // const bgOpacity = scrollProgress; // 0 → 1
+    // const backgroundColor = `rgba(255, 244, 224, ${bgOpacity})`; // #FFF4E0 with fade
 
   // Only Services has sub-items; other items have empty arrays (no dropdown)
   const navItems = [
@@ -19,28 +59,53 @@ const Nav = () => {
 
   return (
     <div className="relative ">
-      <header className="fixed w-full shadow z-100  bg-white dark:bg-[#FFF4E0] ">
-        {/* <svg className="block absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 190"><path fill="#7777" fill-opacity="1" 
-          d="M0,224L60,202.7C120,181,240,139,360,144C480,149,600,203,720,208C840,213,960,171,1080,149.3C1200,128,1320,128,1380,128L1440,128L1440,0L1380,
-          0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg> */}
-
-          {/* <svg className="block absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 215"><path fill="#7A2E2E" fill-opacity="0.5" 
-          d="M0,192L80,176C160,160,320,128,480,138.7C640,149,800,203,960,213.3C1120,224,1280,192,1360,176L1440,
-          160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg> */}
+      <header 
+      className="fixed w-full z-100 transition-all"
+      style={{
+           backgroundColor: "transparent"
+         
+            }}
+      >
+           {/* Animated SVG background */}
+        <svg
+          className="block absolute top-0 left-0 w-full -z-10 transition-all duration-300"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 215"
+          style={{
+            opacity: scrollProgress, // gradually visible
+            transform: `translateY(${(1 - scrollProgress) * -100}px)`, // optional smooth rise
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+          }}
+        >
+          <path
+            fill="#7A2E2E"
+            fillOpacity="1"
+            d="M0,128L80,112C160,96,320,64,480,74.7C640,85,800,139,960,149.3C1120,160,1280,128,1360,112L1440,
+            96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
+          ></path>
+        </svg>
 
         <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8 lg:py-12 md:py-12 sm:py-12 ">
           {/* Logo */}
-          <a className="flex" href="#">          
-            <img
-              src={Logo}
-              alt="Logo"
-              className="lg:w-14 w-10"
-            />
-            <a className="flex items-center justify-center  p-2">
-              <h4 className="font-bold text-[2.5vw] md:text-[1.5vw] lg:text-[2vw] text-[#2E2E2E]">STEFRED</h4>
-              <h4 className="p-4 text-[#7A2E2E]">|</h4>
-              <h4 className="font-semibold text-[#7A2E2E] text-[1.8vw] md:text-[1.0vw] lg:text-[1.2vw]">FACILITY MANAGEMENT</h4>
-            </a>
+          <a className="flex items-center" href="#">
+            <img src={Logo} alt="Logo" className="lg:w-14 w-10" />
+            <div className="flex items-center justify-center p-2">
+              <h4
+                className="font-bold text-[2.5vw] md:text-[1.5vw] lg:text-[2vw]"
+                style={{ color: dynamicColor }}
+              >
+                STEFRED
+              </h4>
+              <h4 className="p-4" style={{ color: dynamicColor }}>
+                |
+              </h4>
+              <h4
+                className="font-semibold text-[1.8vw] md:text-[1.0vw] lg:text-[1.2vw]"
+                style={{ color: dynamicColor2 }}
+              >
+                FACILITY MANAGEMENT
+              </h4>
+            </div>
           </a>
 
           <div>
@@ -60,9 +125,9 @@ const Nav = () => {
                   >
                     {/* If item has no dropdown, render as normal link */}
                     {!hasDropdown ? (
-                      <a className={navA} href={item.href}>
-                        {item.label}
-                      </a>
+                    <a href={item.href} className={navA} style={{ color: dynamicColor }}>
+                      {item.label}
+                    </a>
                     ) : (
                       // If item has dropdown, render as button-like span with arrow
                       <button
@@ -70,6 +135,7 @@ const Nav = () => {
                         aria-expanded={openDropdown === index}
                         aria-controls={`dropdown-${index}`}
                         className={navA}
+                        style={{ color: dynamicColor }}
                         onClick={() =>
                           // allow click to toggle on desktop as well (optional)
                           setOpenDropdown(openDropdown === index ? null : index)
@@ -99,13 +165,13 @@ const Nav = () => {
                     {hasDropdown && openDropdown === index && (
                       <ul
                         id={`dropdown-${index}`}
-                        className="absolute left-0 mt-2 w-44 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-md shadow-lg z-20"
+                        className="absolute left-0 mt-2 w-44 bg-[#7A2E2E] rounded-md shadow-lg z-20"
                       >
                         {item.dropdown.map((sub, i) => (
                           <li key={i}>
                             <a
                               href="#"
-                              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                              className="block px-4 py-2 text-sm text-[#FFF4E0] hover:bg-gray-50 dark:hover:bg-gray-700"
                             >
                               {sub}
                             </a>
@@ -121,8 +187,12 @@ const Nav = () => {
             {/* Login Button (desktop) */}
             <div className="hidden md:flex items-center gap-4">
               <a
-                className="rounded-4xl border border-[#2E2E2E] px-[4vw] py-2.5 text-[1.3vw] font-medium text-[#2E2E2E]"
+                className="rounded-4xl border border-[#2E2E2E] px-[4vw] py-2.5 text-[1.3vw] font-medium text-[#2E2E2E] transition duration-300"
                 href="#"
+                style={{
+                borderColor: dynamicColor,
+                color: dynamicColor,
+                }}
               >
                 Contact Us
               </a>
@@ -142,6 +212,7 @@ const Nav = () => {
             className="block md:hidden rounded-sm  p-2.5 text-[#2E2E2E] transition"
             aria-expanded={menuOpen}
             aria-label="Toggle menu"
+            style={{ color: dynamicColor }}
           >
             <span className="sr-only">Toggle menu</span>
             {menuOpen ? (
@@ -199,10 +270,10 @@ const Nav = () => {
 
                         {/* Mobile dropdown items */}
                         {openDropdown === index && (
-                          <ul id={`mobile-dropdown-${index}`} className="pl-4 border-l border-gray-200 dark:border-gray-700">
+                          <ul id={`mobile-dropdown-${index}`} className="pl-4 bg-[#7A2E2E]">
                             {item.dropdown.map((sub, i) => (
                               <li key={i}>
-                                <a href="#" className="block py-1 text-sm text-gray-600 dark:text-gray-400 hover:text-orange-500">
+                                <a href="#" className="block py-1 text-sm text-[#FFF4E0] hover:text-orange-500">
                                   {sub}
                                 </a>
                               </li>
@@ -228,20 +299,6 @@ const Nav = () => {
           </nav>
         )}
 
-         {/* <svg className="block absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 230"><path fill="#ffff" fill-opacity="1" 
-          d="M0,224L60,202.7C120,181,240,139,360,144C480,149,600,203,720,208C840,213,960,171,1080,149.3C1200,128,1320,128,1380,128L1440,128L1440,0L1380,
-          0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg> */}
-
-          {/* <svg className="block absolute -top-15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 230"><path fill="#7777" fill-opacity="1" 
-          d="M0,224L60,202.7C120,181,240,139,360,144C480,149,600,203,720,208C840,213,960,171,1080,149.3C1200,128,
-          1320,128,1380,128L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,
-          480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg> */}
-
-          {/* 100 */}
-
-          {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" 
-          d="M0,192L80,176C160,160,320,128,480,138.7C640,149,800,203,960,213.3C1120,224,1280,192,1360,176L1440,
-          160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg> */}
     </header>
     </div>
     
