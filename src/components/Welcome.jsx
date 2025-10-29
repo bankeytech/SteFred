@@ -29,10 +29,13 @@ const Welcome = () => {
           </h2>
 
           <p className="text-[#444] text-sm sm:text-base lg:text-lg leading-relaxed">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eaque
-            reprehenderit hic delectus, id est molestiae corrupti nostrum aliquam
-            vel accusantium. A tenetur inventore culpa ut, deserunt mollitia
-            molestias corporis quas!
+            Stefred Davs Ventures Ltd is a full service property management company which was established
+             in Nigeria since 2016 with a skilled workforce to deliver professional FM services for over 
+             lots of properties to high quality,also to enable us to consistently deliver first class 
+             integrated facilities management services. At the heart of our success is an understanding
+             that the buildings we manage are ultimately about the people that use them. By applying 
+             that to everything we do, we can deliver bespoke harmonized solutions that support our 
+             clients activities, drive cost and add value
           </p>
 
           <div className="flex flex-col gap-4 w-full">

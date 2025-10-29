@@ -8,19 +8,31 @@ const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [revealHeight, setRevealHeight] = useState(700); // default for desktop
+
+  // ✅ Detect screen size and set revealHeight accordingly
+  useEffect(() => {
+    const updateRevealHeight = () => {
+      if (window.innerWidth < 768) {
+        setRevealHeight(700); // mobile
+      } else {
+        setRevealHeight(828); // desktop
+      }
+    };
+    updateRevealHeight(); // run once on load
+    window.addEventListener("resize", updateRevealHeight);
+    return () => window.removeEventListener("resize", updateRevealHeight);
+  }, []);
 
    // Track scroll to control SVG reveal
     useEffect(() => {
-      const handleScroll = () => {
-        // Choose how far (in pixels) before the SVG is fully shown
-        const revealHeight = 820; // adjust this based on your layout
-        const scrolled = Math.min(window.scrollY / revealHeight, 1);
-        setScrollProgress(scrolled);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    const handleScroll = () => {
+      const scrolled = Math.min(window.scrollY / revealHeight, 1);
+      setScrollProgress(scrolled);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [revealHeight]);
 
      // helper to blend between two colors (from and to)
       const blendColor = (from, to, progress) => {
@@ -60,15 +72,12 @@ const Nav = () => {
   return (
     <div className="relative ">
       <header 
-      className="fixed w-full z-100 transition-all"
-      style={{
-           backgroundColor: "transparent"
-         
-            }}
+      className="fixed w-full z-100 transition-all lg:bg-transparent md:bg-transparent bg-[#7A2E2E]"
+    
       >
            {/* Animated SVG background */}
         <svg
-          className="block absolute top-0 left-0 w-full -z-10 transition-all duration-300"
+          className="lg:block absolute top-0 left-0 w-full -z-10 transition-all duration-300 md:block hidden"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 215"
           style={{
@@ -85,18 +94,27 @@ const Nav = () => {
           ></path>
         </svg>
 
-        <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8 lg:py-12 md:py-12 sm:py-12 ">
+
+        <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8 lg:py-12 md:py-5 sm:py-12 lg:shadow-none md:shadow-none shadow ">
           {/* Logo */}
           <a className="flex items-center" href="#">
             <img src={Logo} alt="Logo" className="lg:w-14 w-10" />
             <div className="flex items-center justify-center p-2">
               <h4
-                className="font-bold text-[2.5vw] md:text-[1.5vw] lg:text-[2vw]"
+                className="font-bold text-[2.5vw] md:text-[1.5vw] lg:text-[2vw] lg:block md:block hidden"
                 style={{ color: dynamicColor }}
               >
                 STEFRED
               </h4>
-              <h4 className="p-4" style={{ color: dynamicColor }}>
+              <h4
+                className="font-bold text-[#FFF4E0] text-[2.5vw] md:text-[1.5vw] lg:text-[2vw] block lg:hidden md:hidden "         
+              >
+                STEFRED
+              </h4>
+              <h4 className="p-4 lg:block md:block hidden" style={{ color: dynamicColor }}>
+                |
+              </h4>
+              <h4 className="p-4  block lg:hidden md:hidden text-[#FFF4E0]" >
                 |
               </h4>
               <h4
@@ -209,10 +227,10 @@ const Nav = () => {
               // close any open dropdown when toggling mobile menu
               if (menuOpen) setOpenDropdown(null);
             }}
-            className="block md:hidden rounded-sm  p-2.5 text-[#2E2E2E] transition"
+            className="block md:hidden rounded-sm  p-2.5 text-[#FFF4E0] transition"
             aria-expanded={menuOpen}
             aria-label="Toggle menu"
-            style={{ color: dynamicColor }}
+            // style={{ color: dynamicColor }}
           >
             <span className="sr-only">Toggle menu</span>
             {menuOpen ? (

@@ -45,7 +45,7 @@ const Choose = () => {
         {/* Header Section */}
         <div className="lg:px-20 px-6 mt-20">
           <h2 className="font-bold text-3xl text-[#7A2E2E]">HOW IT WORKS</h2>
-          <h4 className="text-4xl font-semibold pt-5">
+          <h4 className="text-4xl font-semibold pt-5 text-[#2E2E2E]">
             Why Choose Our Facility Management <br /> Solutions
           </h4>
         </div>

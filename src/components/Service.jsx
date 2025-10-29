@@ -49,7 +49,7 @@ const Service = () => {
       <div className='bg-[#FFF4E0] w-full'>
         <div className='lg:px-20 px-6 mt-20'>
           <h2 className='font-bold text-3xl text-[#7A2E2E]'>Services</h2>
-          <h4 className='text-4xl font-semibold pt-5'>Our Valuable Facility Management <br /> Services</h4>
+          <h4 className='text-4xl font-semibold pt-5 text-[#2E2E2E]'>Our Valuable Facility Management <br /> Services</h4>
         </div>
         <div className="m-10 lg:px-48 mt-15 hidden md:block lg:block">
           <ol className="relative space-y-8 before:absolute before:top-0 before:left-1/2 before:h-full before:w-0.5 before:-translate-x-1/2 before:rounded-full dark:before:bg-gray-700">
@@ -70,7 +70,7 @@ const Service = () => {
                     />
 
                    </div>
-                    <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
+                    <h3 className="text-lg font-bold text-[#2E2E2E]">{item.title}</h3>
 
                     <p className="mt-0.5 text-md text-gray-700">
                       {item.description}
