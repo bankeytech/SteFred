@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Nav";
 import Service from "./components/Service";
 import SubNav from "./components/SubNav";
+import Vision from "./components/Vision";
 import Welcome from "./components/Welcome";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <SubNav/>
       <Welcome/>
       <Service/> 
+      <Vision/> 
       <Choose/>
       <Footer/>
       {/* //  </> */}
