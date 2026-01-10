@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/images/Logo1.svg";
+import Logo from "/src/assets/images/Logo1.svg";
 import {
   BsFacebook,
   BsInstagram,
@@ -10,12 +10,12 @@ import {
 const Footer = () => {
   return (
     <footer className="relative flex items-center justify-center text-[#FFF4E0]">
-      <div className="bg-[#7A2E2E] w-full flex flex-col items-center justify-center -mt-3">
+      <div className="bg-[#7A2E2E] w-full flex flex-col items-center justify-center">
         {/* Wave Divider */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 230"
-          className="w-full"
+          className="w-full -mt-1"
         >
           <path
             fill="#FFF4E0"

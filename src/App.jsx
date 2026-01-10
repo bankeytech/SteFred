@@ -1,25 +1,14 @@
-import Choose from "./components/Choose";
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import Navbar from "./components/Nav";
-import Service from "./components/Service";
-import SubNav from "./components/SubNav";
-import Vision from "./components/Vision";
-import Welcome from "./components/Welcome";
+import { Routes, Route } from 'react-router-dom'
+import Home from "./components/Home/Home"
+import About from "./components/About/About"
+
 
 const App = () => {
   return (
-    <div>
-      <Navbar/>
-      <Hero/>
-      <SubNav/>
-      <Welcome/>
-      <Service/> 
-      <Vision/> 
-      <Choose/>
-      <Footer/>
-      {/* //  </> */}
-    </div>
+     <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+    </Routes>
   )
 }
 

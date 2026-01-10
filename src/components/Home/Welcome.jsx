@@ -1,4 +1,4 @@
-import Bground from "../assets/images/Welimg.png";
+import Bground from "/src/assets/images/Welimg.png";
 
 const services = [
   {

@@ -1,4 +1,4 @@
-import "../index.css";
+import "/src/index.css";
 import { FaUsersCog, FaCogs } from "react-icons/fa";
 import { TbTargetArrow } from "react-icons/tb";
 import { BsLightbulbFill } from "react-icons/bs";
@@ -41,7 +41,7 @@ const Choose = () => {
 
   return (
     <div className="relative flex items-center justify-center">
-      <div className="bg-[#FFF4E0] w-full pb-30">
+      <div className="bg-[#FFF4E0] w-full pb-30 -mb-6">
         {/* Header Section */}
         <div className="lg:px-20 px-6 mt-20">
           <h2 className="font-bold text-3xl text-[#7A2E2E]">HOW IT WORKS</h2>

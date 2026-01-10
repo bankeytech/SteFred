@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "motion/react"
-import Tool from "../assets/images/Soio.png"
+import Tool from "/src/assets/images/Soio.png"
 
 const SubNav = () => {
   return (

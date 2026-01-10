@@ -1,10 +1,10 @@
 import React from 'react'
-import Pip from "../assets/images/tett1.png"
-import Pip1 from "../assets/images/img6.jpeg";
-import Pip2 from "../assets/images/img7.jpeg";
-import Pip3 from "../assets/images/img8.jpeg";
-import Pip4 from "../assets/images/img11.jpeg";
-import Pip5 from "../assets/images/img1 .jpeg";
+import Pip from "/src/assets/images/tett1.png"
+import Pip1 from "/src/assets/images/img6.jpeg";
+import Pip2 from "/src/assets/images/img7.jpeg";
+import Pip3 from "/src/assets/images/img8.jpeg";
+import Pip4 from "/src/assets/images/img11.jpeg";
+import Pip5 from "/src/assets/images/img1 .jpeg";
 
 
 

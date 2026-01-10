@@ -3,9 +3,9 @@ import { FaEye, FaRocket } from "react-icons/fa";          // simple and clear
 
 const Vision = () => {
   return (
-    <div className='relative flex items-center justify-center'>
+    <div className='relative flex items-center justify-center '>
       <div className='bg-[#FFF4E0] w-full'>
-        <div className="p-6 lg:px-20">
+        <div className="p-6 pb-14 lg:px-20">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
             <div className="p-8 rounded-2xl drop-shadow-xl drop-shadow-[#7A2E2E] bg-[#FFF4E0]">
               <h2 className='lg:text-[2.7vw] text-[4vw] font-semibold py-3 text-[#7A2E2E] flex items-center justify-between'>

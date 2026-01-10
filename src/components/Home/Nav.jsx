@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../assets/images/Logo1.svg"
+import Logo from "/src/assets/images/Logo1.svg"
+import { Link, NavLink } from "react-router-dom";
+
 
 const navA =
   "flex items-center gap-3 text-[#2E2E2E] dark:text-[#2E2E2E] transition duration-200 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer text-[1.2vw]";
@@ -62,12 +64,21 @@ const Nav = () => {
 
   // Only Services has sub-items; other items have empty arrays (no dropdown)
   const navItems = [
-    { label: "Home", href: "#" , dropdown: [] },
-    { label: "About", href: "#" , dropdown: [] },
-    { label: "Services", href: "#services", dropdown: ["Consulting", "Design", "Development"] },
-    { label: "Projects", href: "#" , dropdown: [] },
-    { label: "Contact", href: "#" , dropdown: [] },
-  ];
+  { label: "Home", path: "/", dropdown: [] },
+  { label: "About", path: "/about", dropdown: [] },
+  {
+    label: "Services",
+    path: "/services",
+    dropdown: [
+      { label: "Consulting", path: "/services/consulting" },
+      { label: "Design", path: "/services/design" },
+      { label: "Development", path: "/services/development" },
+    ],
+  },
+  { label: "Projects", path: "/projects", dropdown: [] },
+  { label: "Contact", path: "/contact", dropdown: [] },
+];
+
 
   return (
     <div className="relative ">
@@ -143,9 +154,16 @@ const Nav = () => {
                   >
                     {/* If item has no dropdown, render as normal link */}
                     {!hasDropdown ? (
-                    <a href={item.href} className={navA} style={{ color: dynamicColor }}>
+                   <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        `${navA} ${isActive ? "text-orange-500 font-semibold" : ""}`
+                      }
+                      style={{ color: dynamicColor }}
+                      >
                       {item.label}
-                    </a>
+                    </NavLink>
+
                     ) : (
                       // If item has dropdown, render as button-like span with arrow
                       <button
@@ -187,12 +205,13 @@ const Nav = () => {
                       >
                         {item.dropdown.map((sub, i) => (
                           <li key={i}>
-                            <a
-                              href="#"
-                              className="block px-4 py-2 text-sm text-[#FFF4E0] hover:bg-gray-50 dark:hover:bg-gray-700"
+                            <NavLink
+                              to={sub.path}
+                              className="block px-4 py-2 text-sm text-[#FFF4E0] hover:bg-gray-50"
                             >
-                              {sub}
-                            </a>
+                              {sub.label}
+                            </NavLink>
+
                           </li>
                         ))}
                       </ul>
@@ -258,9 +277,14 @@ const Nav = () => {
                   <li key={index} className="relative">
                     {/* If no dropdown, render a plain link */}
                     {!hasDropdown ? (
-                      <a href={item.href} className="block w-full py-2 text-gray-700 dark:text-gray-300">
+                      <NavLink
+                        to={item.path}
+                        className="block w-full py-2 text-gray-700 dark:text-gray-300"
+                        onClick={() => setMenuOpen(false)}
+                        >
                         {item.label}
-                      </a>
+                        </NavLink>
+
                     ) : (
                       // If dropdown exists, render toggle button + arrow
                       <>
@@ -291,9 +315,14 @@ const Nav = () => {
                           <ul id={`mobile-dropdown-${index}`} className="pl-4 bg-[#7A2E2E]">
                             {item.dropdown.map((sub, i) => (
                               <li key={i}>
-                                <a href="#" className="block py-1 text-sm text-[#FFF4E0] hover:text-orange-500">
-                                  {sub}
-                                </a>
+                                <NavLink
+                                  to={sub.path}
+                                  className="block py-1 text-sm text-[#FFF4E0] hover:text-orange-500"
+                                  onClick={() => setMenuOpen(false)}
+                                >
+                                  {sub.label}
+                                </NavLink>
+
                               </li>
                             ))}
                           </ul>
